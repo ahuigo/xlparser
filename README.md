@@ -13,5 +13,10 @@ Convert xlsx/xls to csv
 
 ### Module Usage
 
+    from xlscsv import parseXls, toCsv
+
+    rows = parseXls('some.xlsx')
+    toCsv(rows, 'to.csv')
+
 ## Required
 1. python>=3.5
