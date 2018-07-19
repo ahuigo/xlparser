@@ -1,28 +1,20 @@
 from setuptools import setup, find_packages
-import re
-version = "0.1.10"
-
-version = re.sub(r'(\d+\.\d+\.)(\d+)', 
-        lambda m: '%s%d' % (m.group(1), int(m.group(2))+1), 
-        version,1)
+import re,os
+version = "0.1.12"
 
 setup(
     name='xlscsv',
     version = version,
-    packages=['.'],
+    packages=[],
     python_requires='>=3.5.3',
     install_requires=[ 'xlrd', 'openpyxl'],
     scripts = ['xlscsv.py'],
     description = open('README.md').readlines()[1],
     long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
     author = "ahuigo",
     author_email = "ahui132@qq.com",
     license = "MIT",
     url = "http://github.com/ahuigo/xlscsv",   
 )
 
-s = open('setup.py').read()
-s = re.sub(r'(?<=\n)(version *= *")(\d+\.\d+\.)(\d+)"', 
-    lambda m: 'version = "%s"' % (version),
-    s,1)
-open('setup.py', 'w').write(s)

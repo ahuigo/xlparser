@@ -7,6 +7,7 @@ Convert xlsx/xls to csv
     pip3 install xlscsv
 
 ## Usage
+
 ### CLI Usage
 
     $ xlscsv.py src.xlsx dest.csv
