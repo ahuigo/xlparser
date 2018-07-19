@@ -20,3 +20,5 @@ Convert xlsx/xls to csv
 
 ## Required
 1. python>=3.5
+2. xlrd: required by xls
+2. openpyxl: required by xlsx

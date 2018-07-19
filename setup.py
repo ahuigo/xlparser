@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 import re
-version = "0.1.3"
+version = "0.1.10"
 
 version = re.sub(r'(\d+\.\d+\.)(\d+)', 
         lambda m: '%s%d' % (m.group(1), int(m.group(2))+1), 
@@ -9,9 +9,9 @@ version = re.sub(r'(\d+\.\d+\.)(\d+)',
 setup(
     name='xlscsv',
     version = version,
-    install_requires=[ ],
     packages=['.'],
     python_requires='>=3.5.3',
+    install_requires=[ 'xlrd', 'openpyxl'],
     scripts = ['xlscsv.py'],
     description = open('README.md').readlines()[1],
     long_description=open('README.md').read(),

@@ -30,9 +30,11 @@ def isInValid(cell):
 parse xlsx, xls
 '''
 def parseXls(src):
+    if src.endswith('.xls'):
+        return parseXlsOld(src)
     wb = openpyxl.load_workbook(src)
     sh = wb.active
-    maxl = len(next(sh.rows))
+    #maxl = len(next(sh.rows))
 
     rows = []
     for r in sh.rows:
@@ -43,6 +45,15 @@ def parseXls(src):
         if(any(row)):
             debug(row)
             rows.append(row)
+    return rows
+
+def parseXlsOld(src):
+    from xlrd import open_workbook
+    sh = open_workbook(filename).sheets()[0]
+    rows = []
+    for r in range(sh.nrows):
+        row = [v if str(v).isdigit() else v  for v in sh.row_values(r)]
+        rows.append(row)
     return rows
 
 def toCsv(rows, dest):
