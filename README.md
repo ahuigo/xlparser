@@ -1,0 +1,17 @@
+# Xlscsv
+Convert xlsx/xls to csv
+
+## Install
+
+    pip install xlscsv
+    pip3 install xlscsv
+
+## Usage
+### CLI Usage
+
+    $ xlscsv.py src.xlsx dest.csv
+
+### Module Usage
+
+## Required
+1. python>=3.5
