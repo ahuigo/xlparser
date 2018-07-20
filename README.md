@@ -1,19 +1,19 @@
-# xlsparser
+# xlparser
 Parse excel(xlsx/xls) to other format(dict, csv, json, ...).
 
 ## Install
 
-    pip install xlsparser
-    pip3 install xlsparser
+    pip install xlparser
+    pip3 install xlparser
 
 ## Usage
 
 ### CLI Usage
 
-    $ xlsparser.py src.xlsx -csv
+    $ xlparser.py src.xlsx -csv
     [['asdf', 'bbb'], ['看', '我', '变']]
 
-    $ xlsparser.py src.xlsx -json
+    $ xlparser.py src.xlsx -json
     [['asdf', 'bbb'], ['看', '我', '变']]
 
 ### Module Usage
@@ -31,14 +31,14 @@ The `parse` function support the following file format:
 
 The `parse` will automatically parse any file to `rows` generator:
 
-    >>> from xlsparser import parse, saveCsv
+    >>> from xlparser import parse, saveCsv
     >>> rows = parse('some.xlsx')
     >>> list(rows)
     [['asdf', 'bbb'], ['看', '我', '变']]
 
 ### Csv operation
 
-    >>> from xlsparser import *
+    >>> from xlparser import *
 
     >>> rows = [('asdf','bbb'), ('看','我','变')]
     >>> saveCsv(rows, 'test.csv')
