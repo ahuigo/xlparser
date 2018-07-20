@@ -1,20 +1,28 @@
-from setuptools import setup, find_packages
-import re,os
-version = "0.1.12"
+'''
+setup for pypi package
+'''
+from setuptools import setup
+import re 
+import os
 
+version = "0.2.0"
+
+# find_packages
 setup(
-    name='xlscsv',
+    name='xlsparser',
     version = version,
+    python_requires='>=3.6.1',
+
     packages=[],
-    python_requires='>=3.5.3',
-    install_requires=[ 'xlrd', 'openpyxl'],
-    scripts = ['xlscsv.py'],
+    py_modules=['xlsparser'], # single module
+    install_requires=[ 'xlrd', 'openpyxl>=2.5.4'],
+    scripts = ['xlsparser.py'],
     description = open('README.md').readlines()[1],
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     author = "ahuigo",
     author_email = "ahui132@qq.com",
     license = "MIT",
-    url = "http://github.com/ahuigo/xlscsv",   
+    url = "http://github.com/ahuigo/xlsparser",   
 )
 
