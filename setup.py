@@ -5,7 +5,7 @@ from setuptools import setup
 import re
 import os
 
-version = "0.2.0"
+version = "0.2.1"
 
 # find_packages
 setup(
