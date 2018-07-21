@@ -8,7 +8,7 @@ from dateutil.parser import parse as strptime
 import json
 import _io
 
-__all__ = ["parseXlsx", 'parseCsv', 'parseXls', 'saveCsv', 'openXlsx']
+__all__ = ["parseXlsx", 'parseCsv', 'parseXls', 'saveCsv', 'openXlsx', 'rows2dict']
 
 '''
 Format time
@@ -22,6 +22,12 @@ def getCellValue(cell):
         value = cell.value
     return value
 
+def rows2dict(rows):
+    if not hasattr(rows, '__next__'):
+        rows = iter(rows)
+    titles = next(rows)
+    for row in rows:
+        yield dict(zip(titles, row))
 
 '''
 '''
