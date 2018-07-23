@@ -3,6 +3,9 @@ Parse excel(xlsx/xls/csv) to other format(dict, csv, json, ...).
 
 > Warning: some old versiones of xls are not supported.
 
+[![](https://img.shields.io/pypi/pyversions/xlparser.svg?longCache=True)](https://pypi.org/pypi/xlparser/)
+[![](https://img.shields.io/pypi/v/xlparser.svg?maxAge=36000)](https://pypi.org/pypi/xlparser/)
+
 ## Install
 
     pip install xlparser
