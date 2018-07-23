@@ -1,5 +1,7 @@
 # xlparser
-Parse excel(xlsx/xls) to other format(dict, csv, json, ...).
+Parse excel(xlsx/xls/csv) to other format(dict, csv, json, ...).
+
+> Warning: some old versiones of xls are not supported.
 
 ## Install
 
@@ -8,17 +10,23 @@ Parse excel(xlsx/xls) to other format(dict, csv, json, ...).
 
 ## Usage
 
+    $ xlparser
+
 ### CLI Usage
+Convert xlsx to csv
 
-    $ xlparser.py src.xlsx -csv
-    [['asdf', 'bbb'], ['看', '我', '变']]
+    $ xlparser.py src.xlsx | tee test.csv
+    foo, bar
+    看,我,变
 
-    $ xlparser.py src.xlsx -json
-    [['asdf', 'bbb'], ['看', '我', '变']]
+Convert csv to json
+
+    $ xlparser.py test.csv -json | tee test.json
+    [["foo", "bar"], ["看", "我", "变"]]
 
 ### Module Usage
 
-### parse
+### parse any type of file
 The `parse` function support the following file format:
 
     def parse(src):
@@ -29,24 +37,36 @@ The `parse` function support the following file format:
         if src.endswith('.csv'):
             return parseCsv(src)
 
-The `parse` will automatically parse any file to `rows` generator:
+`parse` any type of file to rows:
 
     >>> from xlparser import parse, saveCsv
     >>> rows = parse('some.xlsx')
     >>> list(rows)
-    [['asdf', 'bbb'], ['看', '我', '变']]
+    [['foo', 'bar'], ['看', '我', '变']]
+
+Save rows to csv
+
+    >>> saveCsv(rows, 'test.csv')
 
 ### Csv operation
 
     >>> from xlparser import *
 
-    >>> rows = [('asdf','bbb'), ('看','我','变')]
+    >>> rows = [('foo','bar'), ('看','我','变')]
     >>> saveCsv(rows, 'test.csv')
 
     >>> list(parseCsv('test.csv'))
-    [['asdf', 'bbb'], ['看', '我', '变']]
+    [['foo', 'bar'], ['看', '我', '变']]
 
-    toCsv(rows, 'to.csv')
+### Zip operation
+
+    >>> from xlparser import loadZip
+    >>> zf = loadZip('test.xlsx')
+    >>> print(zf.filelist)
+    ......
+    >>> zf.extract('xl/media/image1.png', '/tmp')
+    >>> os.rename('/tmp/'+'xl/media/image1.png', './image1.png')
+
 
 ## Required
 1. python>=3.5
