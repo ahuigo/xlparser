@@ -195,7 +195,7 @@ def saveCsv(rows, filep):
     if not isinstance(filep, _io.TextIOWrapper):
         filep = open(filep, 'w')
     c = csv.writer(filep)
-    [c.writerow(row) for row in rows]
+    c.writerows(rows) 
 
 
 if '-d' in argv:
