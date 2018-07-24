@@ -29,8 +29,8 @@ Convert csv to json
 
 ### Module Usage
 
-### parse any type of file
-The `parse` function support the following file format:
+### Parse any type of file
+The `parse` function supports the following file format:
 
     def parse(src):
         if src.endswith('.xls'):
