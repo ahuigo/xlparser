@@ -210,10 +210,11 @@ if __name__ == '__main__':
     Usage:\n
         $ xlparser.py source.xlsx [options] > new.csv \n
         $ xlparser.py source.csv [options] > new.csv \n
+        $ xlparser.py source.csv [options] > new.json \n
         options:
            -h       For help.
-           -json    Export to json.
            -csv     Export to csv(by default).
+           -json    Export to json.
         '''
               )
         quit()
