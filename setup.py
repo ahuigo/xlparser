@@ -15,7 +15,7 @@ def _read(fname='README.md', line=None):
 
 setup(
     name='xlparser',
-    version="0.2.9",
+    version="0.2.10",
     author="ahuigo",
     author_email="ahui132@qq.com",
     license="MIT",

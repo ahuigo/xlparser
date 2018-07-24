@@ -2,6 +2,7 @@
 import openpyxl
 import csv
 import sys
+import os
 from sys import argv
 from datetime import datetime, timedelta
 from dateutil.parser import parse as strptime
@@ -204,7 +205,7 @@ else:
     debug = lambda *arg: 1
 
 if __name__ == '__main__':
-    if len(argv) < 2:
+    if len(argv) < 2 or '-h' in argv:
         print('''
     Usage:\n
         $ xlparser.py source.xlsx [options] > new.csv \n
@@ -216,6 +217,8 @@ if __name__ == '__main__':
         '''
               )
         quit()
+    if not os.path.exists(argv[1]):
+        quit(f'The file {argv[1]} do not exists!!!!!!!!!')
 
     rows = parse(argv[1])
     debug(f'Convert xlsx from {argv[1]}')
