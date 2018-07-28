@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import sys
+from sys import argv
+from xlparser import *
+
+if '-d' in argv:
+    debug = print
+else:
+    debug = lambda *arg: 1
+
+if __name__ == '__main__':
+    if len(argv) < 2 or '-h' in argv:
+        print('''
+    Usage:\n
+        $ xlparser.py source.xlsx [options] > new.csv \n
+        $ xlparser.py source.csv [options] > new.csv \n
+        $ xlparser.py source.csv [options] > new.json \n
+        options:
+           -h       For help.
+           -csv     Export to csv(by default).
+           -json    Export to json.
+        '''
+              )
+        quit()
+    if not os.path.exists(argv[1]):
+        quit(f'The file {argv[1]} do not exists!!!!!!!!!')
+
+    rows = parse(argv[1])
+    debug(f'Convert xlsx from {argv[1]}')
+
+    #dest = open(argv[2], 'w') if len(argv)>=3 else sys.stdout
+    dest = sys.stdout
+    if '-json' in argv:
+        json.dump(rows, dest, ensure_ascii=False)
+    else:
+        saveCsv(rows, dest)

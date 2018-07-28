@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from os import path as op
 from setuptools import setup
-version = "0.1.12"
 
 
 def _read(fname='README.md', line=None):
@@ -13,9 +12,14 @@ def _read(fname='README.md', line=None):
         return ''
 
 
+'''
+entry_points=
+    [console_scripts]
+    xlparser=xlparser
+'''
 setup(
     name='xlparser',
-    version="0.2.10",
+    version="0.2.11",
     author="ahuigo",
     author_email="ahui132@qq.com",
     license="MIT",
@@ -25,11 +29,7 @@ setup(
     package_dir={"": "."},
     py_modules=['xlparser'],
     install_requires=['xlrd', 'openpyxl>=2.5.4'],
-    # scripts=['xlparser.py'],
-    entry_points='''
-        [console_scripts]
-        xlparser=xlparser
-    ''',
+    scripts=['xlparser'],
 
     description=_read(line=1),
     long_description=_read(),
