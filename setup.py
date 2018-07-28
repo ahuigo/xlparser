@@ -25,7 +25,12 @@ setup(
     package_dir={"": "."},
     py_modules=['xlparser'],
     install_requires=['xlrd', 'openpyxl>=2.5.4'],
-    scripts=['xlparser.py'],
+    # scripts=['xlparser.py'],
+    entry_points='''
+        [console_scripts]
+        xlparser=xlparser
+    ''',
+
     description=_read(line=1),
     long_description=_read(),
     long_description_content_type="text/markdown",

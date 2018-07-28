@@ -18,13 +18,13 @@ Parse excel(xlsx/xls/csv) to other format(dict, csv, json, ...).
 ### CLI Usage
 Convert xlsx to csv
 
-    $ xlparser.py src.xlsx | tee test.csv
+    $ xlparser src.xlsx | tee test.csv
     foo, bar
     看,我,变
 
 Convert csv to json
 
-    $ xlparser.py test.csv -json | tee test.json
+    $ xlparser test.csv -json | tee test.json
     [["foo", "bar"], ["看", "我", "变"]]
 
 ### Module Usage
