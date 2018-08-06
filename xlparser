@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 from sys import argv
 from xlparser import *
 
@@ -31,6 +32,6 @@ if __name__ == '__main__':
     #dest = open(argv[2], 'w') if len(argv)>=3 else sys.stdout
     dest = sys.stdout
     if '-json' in argv:
-        json.dump(rows, dest, ensure_ascii=False)
+        json.dump(list(rows), dest, ensure_ascii=False)
     else:
         saveCsv(rows, dest)
