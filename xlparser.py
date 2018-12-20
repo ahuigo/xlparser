@@ -113,7 +113,7 @@ def isValid(cell, merged_cells):
                         merged_cell.min_col != cell.col_idx or
                         merged_cell.min_row != cell.row
                 ):
-                    valid = False
+                    valid = True #  Split merge_cells
 
     return valid
 
