@@ -19,7 +19,7 @@ entry_points=
 '''
 setup(
     name='xlparser',
-    version="0.2.12",
+    version="0.2.13",
     author="ahuigo",
     author_email="ahui132@qq.com",
     license="MIT",
@@ -28,7 +28,7 @@ setup(
     packages=[],
     package_dir={"": "."},
     py_modules=['xlparser'],
-    install_requires=['xlrd', 'openpyxl>=2.5.4'],
+    install_requires=['xlrd', 'openpyxl>=2.5.4', 'python-dateutil'],
     scripts=['xlparser'],
 
     description=_read(line=1),
