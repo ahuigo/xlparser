@@ -33,17 +33,17 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
     Examples:
 
         $ xlparser src.xlsx | tee test.csv
-        name, age
-        李雷,15
+        name, score
+        "李雷,韩梅",15
         小花,16
 
         $ xlparser src.xlsx | xcut -f name
         name
-        李雷
+        "李雷,韩梅"
         小花
-        $ xlparser src.xlsx | xcut -f age,name
-         age,name
-        15,李雷
+        $ xlparser src.xlsx | xcut -f score,name
+        score,name
+        15,"李雷,韩梅"
         16,小花
 
 ### CLI Usage
