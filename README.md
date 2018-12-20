@@ -17,30 +17,47 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
     Usage:
 
         # Convert xlsx to csv
-        $ xlparser.py source.xlsx [options] > new.csv
+        $ xlparser source.xlsx [options] > new.csv
 
         # Convert csv to csv
-        $ xlparser.py source.csv [options] > new.csv
+        $ xlparser source.csv [options] > new.csv
 
         # Convert csv to json
-        $ xlparser.py source.csv [options] > new.json
+        $ xlparser source.csv [options] > new.json
 
         options:
            -h       For help.
            -csv     Export to csv(by default).
            -json    Export to json.
 
+    Examples:
+
+        $ xlparser src.xlsx | tee test.csv
+        name, age
+        李雷,15
+        小花,16
+
+        $ xlparser src.xlsx | xcut -f name
+        name
+        李雷
+        小花
+        $ xlparser src.xlsx | xcut -f age,name
+         age,name
+        15,李雷
+        16,小花
+
 ### CLI Usage
 Convert xlsx to csv
 
     $ xlparser src.xlsx | tee test.csv
-    foo, bar
-    看,我,变
+    name, age
+    李雷,15
+    小花,16
 
 Convert csv to json
 
     $ xlparser test.csv -json | tee test.json
-    [["foo", "bar"], ["看", "我", "变"]]
+    [["name", "age"], ["李雷", "15"], ["小花", "16"]]
 
 ### Module Usage
 

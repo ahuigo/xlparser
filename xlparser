@@ -15,9 +15,9 @@ if __name__ == '__main__':
     if len(argv) < 2 or '-h' in argv:
         print('''
     Usage:\n
-        $ xlparser.py source.xlsx [options] > new.csv \n
-        $ xlparser.py source.csv [options] > new.csv \n
-        $ xlparser.py source.csv [options] > new.json \n
+        $ xlparser source.xlsx [options] > new.csv \n
+        $ xlparser source.csv [options] > new.csv \n
+        $ xlparser source.csv [options] > new.json \n
         options:
            -h       For help.
            -csv     Export to csv(by default).
