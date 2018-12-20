@@ -1,7 +1,7 @@
 # xlparser
-Parse excel(xlsx/xls/csv) to other format(dict, csv, json, ...).
+Parse excel(xlsx/xls/csv) to other format(csv, json).
 
-> Warning: some old versiones of xls are not supported.
+> Warning: some old versions of xls are not supported.
 
 [![](https://img.shields.io/pypi/pyversions/xlparser.svg?longCache=True)](https://pypi.org/pypi/xlparser/)
 [![](https://img.shields.io/pypi/v/xlparser.svg?maxAge=36000)](https://pypi.org/pypi/xlparser/)
@@ -13,7 +13,22 @@ Parse excel(xlsx/xls/csv) to other format(dict, csv, json, ...).
 
 ## Usage
 
-    $ xlparser
+    $ xlparser -h
+    Usage:
+
+        # Convert xlsx to csv
+        $ xlparser.py source.xlsx [options] > new.csv
+
+        # Convert csv to csv
+        $ xlparser.py source.csv [options] > new.csv
+
+        # Convert csv to json
+        $ xlparser.py source.csv [options] > new.json
+
+        options:
+           -h       For help.
+           -csv     Export to csv(by default).
+           -json    Export to json.
 
 ### CLI Usage
 Convert xlsx to csv
