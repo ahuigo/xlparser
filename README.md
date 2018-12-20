@@ -14,16 +14,16 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
 ## Usage
 
     $ xlparser -h
-    Usage:
+    Usage: xlparser FILE [options]
 
         # Convert xlsx to csv
-        $ xlparser source.xlsx [options] > new.csv
+        $ xlparser source.xlsx  > new.csv
 
         # Convert csv to csv
-        $ xlparser source.csv [options] > new.csv
+        $ xlparser source.csv  > new.csv
 
         # Convert csv to json
-        $ xlparser source.csv [options] > new.json
+        $ xlparser source.csv -json > new.json
 
         options:
            -h       For help.

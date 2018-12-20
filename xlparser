@@ -14,10 +14,10 @@ else:
 if __name__ == '__main__':
     if len(argv) < 2 or '-h' in argv:
         print('''
-    Usage:\n
-        $ xlparser source.xlsx [options] > new.csv \n
-        $ xlparser source.csv [options] > new.csv \n
-        $ xlparser source.csv [options] > new.json \n
+    Usage: xlparser FILE [options] \n
+        $ xlparser source.xlsx  > new.csv \n
+        $ xlparser source.csv  > new.csv \n
+        $ xlparser source.csv -json > new.json \n
         options:
            -h       For help.
            -csv     Export to csv(by default).
