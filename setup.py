@@ -19,7 +19,7 @@ entry_points=
 '''
 setup(
     name='xlparser',
-    version="0.2.19",
+    version="0.3.1",
     author="ahuigo",
     author_email="ahui132@qq.com",
     license="MIT",

@@ -134,25 +134,24 @@ def parse(src):
 
 def parseXlsx(src):
     wb = openpyxl.load_workbook(src, read_only=False, guess_types=True)
-    sh = wb.active
+    #sh = wb.active
+    for sh in wb:
+        merged_cells = get_merged_cells(sh)
+        debug('merged_cells', sys._getframe().f_lineno, (merged_cells))
+        rows = []
+        max_row_idx, max_col_idx = getSheetSize(sh)
 
-    merged_cells = get_merged_cells(sh)
-    debug('merged_cells', sys._getframe().f_lineno, (merged_cells))
-    rows = []
-    max_row_idx, max_col_idx = getSheetSize(sh)
-
-    debug('sh_size', max_row_idx, max_col_idx)
-    for _, r in zip(range(max_row_idx), sh.rows):
-        debug('--iter row-')
-        row = []
-        for _, cell in zip(range(max_col_idx), r):
-            if isValid(cell, merged_cells):
-                v = getCellValue(cell)
-                row.append(v)
-        if(any(row)):
-            debug(row)
-            yield row
-            # rows.append(row)
+        debug('sh_size', max_row_idx, max_col_idx)
+        for _, r in zip(range(max_row_idx), sh.rows):
+            debug('--iter row-')
+            row = []
+            for _, cell in zip(range(max_col_idx), r):
+                if isValid(cell, merged_cells):
+                    v = getCellValue(cell)
+                    row.append(v)
+            if(any(row)):
+                debug(row)
+                yield row
 
     wb.close()
     return rows
@@ -161,14 +160,10 @@ def parseXlsx(src):
 def parseXls(src):
     from xlrd import open_workbook
     wb = open_workbook(src)
-    sh = wb.sheets()[0]
-    rows = []
-    for r in range(sh.nrows):
-        row = [v if str(v).isdigit() else v for v in sh.row_values(r)]
-        yield row
-        # rows.append(row)
-
-    return rows
+    for sh in wb.sheets():
+        for r in range(sh.nrows):
+            row = [v if str(v).isdigit() else v for v in sh.row_values(r)]
+            yield row
 
 
 """
@@ -208,9 +203,9 @@ if __name__ == '__main__':
     if len(argv) < 2 or '-h' in argv:
         print('''
     Usage:\n
-        $ xlparser.py source.xlsx [options] > new.csv \n
-        $ xlparser.py source.csv [options] > new.csv \n
-        $ xlparser.py source.csv [options] > new.json \n
+        $ xlparser source.xlsx [options] > new.csv \n
+        $ xlparser source.csv [options] > new.csv \n
+        $ xlparser source.csv [options] > new.json \n
         options:
            -h       For help.
            -csv     Export to csv(by default).
