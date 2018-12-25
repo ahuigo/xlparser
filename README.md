@@ -29,6 +29,7 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
            -h       For help.
            -csv     Export to csv(by default).
            -json    Export to json.
+           -xlsx    Export to xlsx.
 
     Examples:
 

@@ -190,8 +190,28 @@ def saveCsv(rows, filep):
     # csv.writer(f, delimiter =' ',quotechar =',',quoting=csv.QUOTE_MINIMAL)
     if not isinstance(filep, _io.TextIOWrapper):
         filep = open(filep, 'w')
-    c = csv.writer(filep)
-    c.writerows(rows) 
+
+    try:
+        c = csv.writer(filep)
+        c.writerows(rows) 
+    except BrokenPipeError:
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
+        sys.exit(1)  # Python exits with error code 1 on EPIPE
+
+"""""""""""
+saveXlsx
+"""""""""""
+def saveXlsx(rows, filep):
+    if not isinstance(filep, _io.TextIOWrapper):
+        filep = open(filep, 'w')
+    wb = openpyxl.Workbook()
+    ws1 = wb.active
+
+    for row in rows:
+        ws1.append(row)
+
+    wb.save(filep)
 
 
 if '-d' in argv:
@@ -209,6 +229,7 @@ if __name__ == '__main__':
         options:
            -h       For help.
            -csv     Export to csv(by default).
+           -xlsx    Export to xlsx.
            -json    Export to json.
         '''
               )
@@ -223,5 +244,7 @@ if __name__ == '__main__':
     dest = sys.stdout
     if '-json' in argv:
         json.dump(rows, dest, ensure_ascii=False)
+    elif '-xlsx' in argv:
+        saveXlsx(rows, dest)
     else:
         saveCsv(rows, dest)
