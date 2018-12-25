@@ -37,11 +37,11 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
         "李雷,韩梅",15
         小花,16
 
-        $ xlparser src.xlsx | xcut -f name
+        $ xlparser src.xlsx | xcut --from-csv -f name 
         name
         "李雷,韩梅"
         小花
-        $ xlparser src.xlsx | xcut -f score,name
+        $ xlparser src.xlsx | xcut --from-csv -f score,name
         score,name
         15,"李雷,韩梅"
         16,小花
