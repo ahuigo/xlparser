@@ -62,16 +62,6 @@ Convert csv to json
 ### Module Usage
 
 ### Parse any type of file
-The `parse` function supports the following file format:
-
-    def parse(src):
-        if src.endswith('.xls'):
-            return parseXls(src)
-        if src.endswith('.xlsx'):
-            return parseXlsx(src)
-        if src.endswith('.csv'):
-            return parseCsv(src)
-
 `parse` any type of file to rows:
 
     >>> from xlparser import parse, saveCsv
@@ -79,9 +69,16 @@ The `parse` function supports the following file format:
     >>> list(rows)
     [['foo', 'bar'], ['看', '我', '变']]
 
+The `parse` function supports the following file formats: .csv, .xls, .xlsx .
+
+### Save to any type of file
 Save rows to csv
 
     >>> saveCsv(rows, 'test.csv')
+
+Save rows to xlsx
+
+    >>> saveXlsx(rows, 'test.xlsx')
 
 ### Csv operation
 
