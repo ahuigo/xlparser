@@ -14,24 +14,20 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
 ## Usage
 
     $ xlparser -h
-    Usage: xlparser FILE [options]
+    xlparser [options] INFILE [OUTFILE]\n
+        options:\n
+            -h       For help.\n
 
-        # Convert xlsx to csv
-        $ xlparser source.xlsx  > new.csv
+Examples:
 
-        # Convert csv to csv
-        $ xlparser source.csv  > new.csv
+        # Export to csv.\n
+        $ xlparser source.xlsx new.csv \n
 
-        # Convert csv to json
-        $ xlparser source.csv -json > new.json
+        # Export to xlsx.\n
+        $ xlparser source.csv new.xlsx \n
 
-        options:
-           -h       For help.
-           -csv     Export to csv(by default).
-           -json    Export to json.
-           -xlsx    Export to xlsx.
-
-    Examples:
+        # Export to csv(stdout).\n
+        $ xlparser source.xlsx | head \n
 
         $ xlparser src.xlsx | tee test.csv
         name, score

@@ -10,7 +10,7 @@ import json
 import _io
 
 __all__ = ['loadZip', 'parse', "parseXlsx", 'parseCsv',
-           'parseXls', 'saveCsv', 'openXlsx', 'rows2dict']
+           'parseXls', 'saveCsv', 'saveXlsx', 'openXlsx', 'rows2dict']
 
 
 def loadZip(f):
@@ -204,7 +204,7 @@ saveXlsx
 """""""""""
 def saveXlsx(rows, filep):
     if not isinstance(filep, _io.TextIOWrapper):
-        filep = open(filep, 'w')
+        filep = open(filep, 'wb')
     wb = openpyxl.Workbook()
     ws1 = wb.active
 
@@ -218,33 +218,3 @@ if '-d' in argv:
     debug = print
 else:
     debug = lambda *arg: 1
-
-if __name__ == '__main__':
-    if len(argv) < 2 or '-h' in argv:
-        print('''
-    Usage:\n
-        $ xlparser source.xlsx [options] > new.csv \n
-        $ xlparser source.csv [options] > new.csv \n
-        $ xlparser source.csv [options] > new.json \n
-        options:
-           -h       For help.
-           -csv     Export to csv(by default).
-           -xlsx    Export to xlsx.
-           -json    Export to json.
-        '''
-              )
-        quit()
-    if not os.path.exists(argv[1]):
-        quit(f'The file {argv[1]} do not exists!!!!!!!!!')
-
-    rows = parse(argv[1])
-    debug(f'Convert xlsx from {argv[1]}')
-
-    #dest = open(argv[2], 'w') if len(argv)>=3 else sys.stdout
-    dest = sys.stdout
-    if '-json' in argv:
-        json.dump(rows, dest, ensure_ascii=False)
-    elif '-xlsx' in argv:
-        saveXlsx(rows, dest)
-    else:
-        saveCsv(rows, dest)
