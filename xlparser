@@ -20,13 +20,16 @@ def main(args):
         xlparser [options] INFILE [OUTFILE]\n
             options:\n
                 -h       For help.\n
-        # Export to csv.\n
+        # From xlsx to csv.\n
         $ xlparser source.xlsx new.csv \n
 
-        # Export to xlsx.\n
+        # From csv to xlsx.\n
         $ xlparser source.csv new.xlsx \n
 
-        # Export to csv(stdout).\n
+        # From csv to json.\n
+        $ xlparser source.csv new.json\n
+
+        # From csv to stdout.\n
         $ xlparser source.xlsx | head \n
     """
     if len(args)<=1:

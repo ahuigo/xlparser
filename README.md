@@ -1,5 +1,5 @@
 # xlparser
-Parse excel(xlsx/xls/csv) to other format(csv, json).
+Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
 
 > Warning: some old versions of xls are not supported.
 
@@ -20,13 +20,16 @@ Parse excel(xlsx/xls/csv) to other format(csv, json).
 
 Examples:
 
-        # Export to csv.\n
+        # From xlsx to csv.\n
         $ xlparser source.xlsx new.csv \n
 
-        # Export to xlsx.\n
+        # From csv to xlsx.\n
         $ xlparser source.csv new.xlsx \n
 
-        # Export to csv(stdout).\n
+        # From csv to json.\n
+        $ xlparser source.csv new.json\n
+
+        # From csv to stdout.\n
         $ xlparser source.xlsx | head \n
 
         $ xlparser src.xlsx | tee test.csv
