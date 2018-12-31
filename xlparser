@@ -46,6 +46,7 @@ def main(args):
         if outfile == '-': 
             outfile = sys.stdout
         saveCsv(rows, outfile)
+    sys.stderr.write('Done!\n')
 
 if __name__ == '__main__':
     main()

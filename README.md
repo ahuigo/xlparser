@@ -29,7 +29,7 @@ Examples:
         # From csv to json.\n
         $ xlparser source.csv new.json\n
 
-        # From csv to stdout.\n
+        # From xlsx to stdout.\n
         $ xlparser source.xlsx | head \n
 
         $ xlparser src.xlsx | tee test.csv
@@ -49,14 +49,15 @@ Examples:
 ### CLI Usage
 Convert xlsx to csv
 
-    $ xlparser src.xlsx | tee test.csv
+    $ xlparser src.xlsx test.csv; 
+    $ cat test.csv
     name, age
     李雷,15
     小花,16
 
 Convert csv to json
 
-    $ xlparser test.csv -json | tee test.json
+    $ xlparser test.csv test.json
     [["name", "age"], ["李雷", "15"], ["小花", "16"]]
 
 ### Module Usage
