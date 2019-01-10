@@ -1,7 +1,18 @@
+- [xlparser](#xlparser)
+  - [Install](#install)
+  - [Usage](#usage)
+    - [CLI Usage](#cli-usage)
+    - [Module Usage](#module-usage)
+    - [Parse any type of file](#parse-any-type-of-file)
+    - [Save to any type of file](#save-to-any-type-of-file)
+    - [Csv operation](#csv-operation)
+    - [Zip operation](#zip-operation)
+  - [Required](#required)
+
 # xlparser
 Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
 
-> Warning: some old versions of xls are not supported.
+> Warning: welcome your issues!
 
 [![](https://img.shields.io/pypi/pyversions/xlparser.svg?longCache=True)](https://pypi.org/pypi/xlparser/)
 [![](https://img.shields.io/pypi/v/xlparser.svg?maxAge=36000)](https://pypi.org/pypi/xlparser/)
@@ -9,7 +20,10 @@ Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
 ## Install
 
     pip install xlparser
-    pip3 install xlparser
+
+If you want to filter fields, it will be convenient with [xcut](https://github.com/ahuigo/xcut).
+
+    pip install xcut 
 
 ## Usage
 
@@ -18,35 +32,40 @@ Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
         options:\n
             -h       For help.\n
 
-Examples:
-
-        # From xlsx to csv.\n
-        $ xlparser source.xlsx new.csv \n
-
-        # From csv to xlsx.\n
-        $ xlparser source.csv new.xlsx \n
-
-        # From csv to json.\n
-        $ xlparser source.csv new.json\n
-
-        # From xlsx to stdout.\n
-        $ xlparser source.xlsx | head \n
-
-        $ xlparser src.xlsx | tee test.csv
-        name, score
-        "李雷,韩梅",15
-        小花,16
-
-        $ xlparser src.xlsx | xcut --from-csv -f name 
-        name
-        "李雷,韩梅"
-        小花
-        $ xlparser src.xlsx | xcut --from-csv -f score,name
-        score,name
-        15,"李雷,韩梅"
-        16,小花
-
 ### CLI Usage
+From xlsx to csv.
+
+    $ xlparser source.xlsx new.csv 
+
+From csv to xlsx.
+
+    $ xlparser source.csv new.xlsx 
+
+From csv to json.
+
+    $ xlparser source.csv new.json
+
+From xlsx to csv(stdout).
+
+    $ xlparser source.xlsx | head 
+
+    $ xlparser src.xlsx | tee test.csv
+    name, score
+    "李雷,韩梅",15
+    小花,16
+
+Use xcut to filter fields.
+
+    $ xlparser src.xlsx | xcut --from-csv -f name 
+    name
+    "李雷,韩梅"
+    小花
+
+    $ xlparser src.xlsx | xcut --from-csv -f score,name
+    score,name
+    15,"李雷,韩梅"
+    16,小花
+
 Convert xlsx to csv
 
     $ xlparser src.xlsx test.csv; 
@@ -75,6 +94,8 @@ The `parse` function supports the following file formats: .csv, .xls, .xlsx .
 ### Save to any type of file
 Save rows to csv
 
+    >>> from xlparser import saveCsv
+    >>> rows = [['foo', 'bar'], ['看', '我', '变']]
     >>> saveCsv(rows, 'test.csv')
 
 Save rows to xlsx
@@ -99,7 +120,6 @@ Save rows to xlsx
     ......
     >>> zf.extract('xl/media/image1.png', '/tmp')
     >>> os.rename('/tmp/'+'xl/media/image1.png', './image1.png')
-
 
 ## Required
 1. python>=3.5
