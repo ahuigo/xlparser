@@ -6,6 +6,9 @@ import json
 from sys import argv
 from xlparser import *
 
+if len(argv) <= 1:
+    quit("xlparser --help")
+
 if '-d' in argv:
     debug = print
 else:
