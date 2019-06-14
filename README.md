@@ -9,6 +9,8 @@
     - [Zip 文件处理](#zip-文件处理)
   - [Required](#required)
 
+[English](README.en.md)
+
 # xlparser
 将 excel(xlsx/xls/csv) 转到其他的格式(csv, xlsx, json).
 

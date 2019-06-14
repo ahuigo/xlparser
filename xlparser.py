@@ -61,7 +61,8 @@ def get_col_idx(col):
 
 
 def openXlsx(src, active=True):
-    wb = openpyxl.load_workbook(src, read_only=False, guess_types=True)
+    #wb = openpyxl.load_workbook(src, read_only=False, guess_types=True)
+    wb = openpyxl.load_workbook(src, read_only=False)
     if active:
         return wb.active
     return wb
@@ -133,7 +134,7 @@ def parse(src):
 
 
 def parseXlsx(src):
-    wb = openpyxl.load_workbook(src, read_only=False, guess_types=True)
+    wb = openpyxl.load_workbook(src, read_only=False)
     #sh = wb.active
     for sh in wb:
         merged_cells = get_merged_cells(sh)
