@@ -12,7 +12,6 @@
 # xlparser
 Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
 
-> Warning: welcome your issues!
 
 [![](https://img.shields.io/pypi/pyversions/xlparser.svg?longCache=True)](https://pypi.org/pypi/xlparser/)
 [![](https://img.shields.io/pypi/v/xlparser.svg?maxAge=36000)](https://pypi.org/pypi/xlparser/)
