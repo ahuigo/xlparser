@@ -70,7 +70,7 @@ xcut 命令结合
 
 ### python 调用示例
 
-### 转任何类型的文件
+#### 转任何类型的文件
 `parse` any type of file to rows:
 
     >>> from xlparser import parse, saveCsv
@@ -80,7 +80,7 @@ xcut 命令结合
 
 The `parse` function supports the following file formats: .csv, .xls, .xlsx .
 
-### 保存任何类型的文件
+#### 保存任何类型的文件
 Save rows to csv
 
     >>> from xlparser import parse, saveCsv
@@ -91,7 +91,7 @@ Save rows to xlsx
 
     >>> saveXlsx(rows, 'test.xlsx')
 
-### Csv 文件处理
+#### Csv 文件处理
 
     >>> from xlparser import *
 
@@ -101,7 +101,7 @@ Save rows to xlsx
     >>> list(parseCsv('test.csv'))
     [['foo', 'bar'], ['看', '我', '变']]
 
-### Zip 文件处理
+#### Zip 文件处理
 
     >>> from xlparser import loadZip
     >>> zf = loadZip('test.xlsx')
@@ -110,7 +110,7 @@ Save rows to xlsx
     >>> zf.extract('xl/media/image1.png', '/tmp')
     >>> os.rename('/tmp/'+'xl/media/image1.png', './image1.png')
 
-## Required
+### Required
 1. python>=3.5
 2. xlrd: required by xls
 2. openpyxl>=2.5.4: required by xlsx

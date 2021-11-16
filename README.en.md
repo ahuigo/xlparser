@@ -19,10 +19,14 @@ Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
 ## Install
 
     pip install xlparser
+    # or
+    pip3 install xlparser
 
 If you want to filter fields, it will be convenient with [xcut](https://github.com/ahuigo/xcut).
 
     pip install xcut 
+    # or
+    pip3 install xcut 
 
 ## Usage
 
@@ -80,7 +84,7 @@ Convert csv to json
 
 ### Module Usage
 
-### Parse any type of file
+#### Parse any type of file
 `parse` any type of file to rows:
 
     >>> from xlparser import parse, saveCsv
@@ -90,7 +94,7 @@ Convert csv to json
 
 The `parse` function supports the following file formats: .csv, .xls, .xlsx .
 
-### Save to any type of file
+#### Save to any type of file
 Save rows to csv
 
     >>> from xlparser import saveCsv
@@ -101,7 +105,7 @@ Save rows to xlsx
 
     >>> saveXlsx(rows, 'test.xlsx')
 
-### Csv operation
+#### Csv operation
 
     >>> from xlparser import *
 
@@ -111,7 +115,7 @@ Save rows to xlsx
     >>> list(parseCsv('test.csv'))
     [['foo', 'bar'], ['看', '我', '变']]
 
-### Zip operation
+#### Zip operation
 
     >>> from xlparser import loadZip
     >>> zf = loadZip('test.xlsx')
