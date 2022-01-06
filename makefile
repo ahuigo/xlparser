@@ -6,13 +6,14 @@ main:
 	python3 setup.py sdist bdist_wheel
 	twine upload  dist/*
 
+	# one cli
+	# python3 setup.py sdist bdist_wheel upload
+
 install:
 	pip install -e .
 	#-e git+https://somerepo/bar.git#egg=bar
 	#-e /path/to/pkg
 
-dev:
-	python3 -m pip install build
 
 
 
