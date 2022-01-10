@@ -14,6 +14,5 @@ install:
 	#-e git+https://somerepo/bar.git#egg=bar
 	#-e /path/to/pkg
 
-
-
-
+test:
+	pytest -s

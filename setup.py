@@ -18,9 +18,10 @@ entry_points=
     xlparser=xlparser
 '''
 name='xlparser'
+version = open('version').read().strip()
 setup(
     name=name,
-    version="0.5.1",
+    version=version,
     author="ahuigo",
     author_email="ahui132@qq.com",
     license="MIT",

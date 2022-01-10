@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+from typing import OrderedDict
 import openpyxl
 import csv
 import sys
 import os
 from sys import argv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date as dateType
 from dateutil.parser import parse as strptime
 import json
 import _io
@@ -200,6 +201,16 @@ def saveCsv(rows, filep):
         os.dup2(devnull, sys.stdout.fileno())
         sys.exit(1)  # Python exits with error code 1 on EPIPE
 
+
+"""""""""""
+formatXlsxRow
+"""""""""""
+def formatXlsxRow(row: list):
+    return [formatXlsxCell(x) for x in row]
+
+def formatXlsxCell(data):
+    return data if isinstance(data, (int,str,float, datetime, dateType)) else f'{data}'
+
 """""""""""
 saveXlsx
 """""""""""
@@ -209,8 +220,24 @@ def saveXlsx(rows, filep):
     wb = openpyxl.Workbook()
     ws1 = wb.active
 
+    if not hasattr(rows, '__next__'):
+        rows = iter(rows)
+
+    # handle first row
+    row = next(rows)
+    if isinstance(row, (dict, OrderedDict)):
+        ws1.append(formatXlsxRow(row.keys()))
+        ws1.append(formatXlsxRow(row.values()))
+    elif isinstance(row, (list)):
+        pass
+    else:
+        raise ValueError("not support type:"+type(row))
+
+    # write rows
     for row in rows:
-        ws1.append(row)
+        if isinstance(row, (dict, OrderedDict)):
+            row = row.values()
+        ws1.append(formatXlsxRow(row))
 
     wb.save(filep)
 
