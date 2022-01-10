@@ -224,14 +224,17 @@ def saveXlsx(rows, filep):
         rows = iter(rows)
 
     # handle first row
-    row = next(rows)
+    try:
+        row = next(rows)
+    except StopIteration:
+        raise ValueError(f'empty data!')
     if isinstance(row, (dict, OrderedDict)):
         ws1.append(formatXlsxRow(row.keys()))
         ws1.append(formatXlsxRow(row.values()))
     elif isinstance(row, (list)):
         pass
     else:
-        raise ValueError("not support type:"+type(row))
+        raise ValueError(f"not support type:{type(row)}, only support type dict|orderedDict|list")
 
     # write rows
     for row in rows:

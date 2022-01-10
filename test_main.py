@@ -16,4 +16,7 @@ def test_saveXlsx():
     rows = [{"start_time":datetime.now(), "pjson":{"json":1}}, ["time", "data"], [dateType(2022,1,1)]]
     saveXlsx(rows, '/tmp/test_xlparser.xlsx')
 
+    # test datetime and json
+    rows = [[1,23]]
+    saveXlsx(rows, '/tmp/test_xlparser.xlsx')
     #os.remove('/tmp/test.csv')
