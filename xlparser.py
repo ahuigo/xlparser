@@ -62,8 +62,9 @@ def get_col_idx(col):
 
 
 def openXlsx(src, active=True):
+    # data_only=True, read value instead of math expression
+    wb = openpyxl.load_workbook(src, read_only=False, data_only=True)
     #wb = openpyxl.load_workbook(src, read_only=False, guess_types=True)
-    wb = openpyxl.load_workbook(src, read_only=False)
     if active:
         return wb.active
     return wb
@@ -135,7 +136,7 @@ def parse(src):
 
 
 def parseXlsx(src):
-    wb = openpyxl.load_workbook(src, read_only=False)
+    wb = openpyxl.load_workbook(src, read_only=False, data_only=True)
     #sh = wb.active
     for sh in wb:
         merged_cells = get_merged_cells(sh)
@@ -209,7 +210,9 @@ def formatXlsxRow(row: list):
     return [formatXlsxCell(x) for x in row]
 
 def formatXlsxCell(data):
-    return data if isinstance(data, (int,str,float, datetime, dateType)) else f'{data}'
+    d = data if isinstance(data, (int,str,float, datetime, dateType)) else f'{data}'
+    #print("format data:", type(d), d)
+    return d
 
 """""""""""
 saveXlsx
@@ -232,7 +235,7 @@ def saveXlsx(rows, filep):
         ws1.append(formatXlsxRow(row.keys()))
         ws1.append(formatXlsxRow(row.values()))
     elif isinstance(row, (list)):
-        pass
+        ws1.append(formatXlsxRow(row))
     else:
         raise ValueError(f"not support type:{type(row)}, only support type dict|orderedDict|list")
 
