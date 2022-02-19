@@ -71,12 +71,14 @@ def openXlsx(src, active=True):
 
 
 def getSheetSize(sh):
-    max_col_idx = len(next(sh.rows))
-    max_row = len(next(sh.columns))
-    # if bool(sh.column_dimensions):
-    #    max_col_idx = get_col_idx(list(sh.column_dimensions)[-1])
-    return (max_row, max_col_idx)
-
+    try:
+        max_col_idx = len(next(sh.rows))
+        max_row = len(next(sh.columns))
+        # if bool(sh.column_dimensions):
+        #    max_col_idx = get_col_idx(list(sh.column_dimensions)[-1])
+        return (max_row, max_col_idx)
+    except StopIteration as e:
+        return 0,0
 
 def get_merged_cells(sh):
     l = []
@@ -230,12 +232,14 @@ def saveXlsx(rows, filep):
     try:
         row = next(rows)
     except StopIteration:
-        raise ValueError(f'empty data!')
+        row = None
     if isinstance(row, (dict, OrderedDict)):
         ws1.append(formatXlsxRow(row.keys()))
         ws1.append(formatXlsxRow(row.values()))
     elif isinstance(row, (list)):
         ws1.append(formatXlsxRow(row))
+    elif row==None:
+        pass
     else:
         raise ValueError(f"not support type:{type(row)}, only support type dict|orderedDict|list")
 

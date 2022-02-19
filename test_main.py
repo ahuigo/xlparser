@@ -1,13 +1,12 @@
 from xlparser import parse, saveCsv, saveXlsx
 from dateutil.parser import parse as parsetime
-from datetime import timedelta,datetime
+from datetime import datetime, date as dateType, timedelta
+import os
 
 def isCloseTime(t1:datetime, t2:datetime, tol=timedelta(microseconds=10)):
     return abs(t1-t2)<tol
 
 def test_saveXlsx():
-    import os
-    from datetime import datetime, date as dateType
 
     # test list
     rows = [['foo', 'bar'], ['看', '我', '变']]
@@ -32,3 +31,8 @@ def test_saveXlsx():
     assert list(parse('/tmp/test_xlparser.xlsx'))[0][1] == rows[0][1]
     #os.remove('/tmp/test.csv')
 
+
+def testParseXlsx():
+    saveXlsx([], '/tmp/test_xlparser.xlsx')
+    assert len(list(parse('/tmp/test_xlparser.xlsx'))) == 0
+    
