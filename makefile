@@ -3,7 +3,7 @@ main:
 	rm -rf  dist/*
 	# sdist is source code(dist/ and pkg.egg-info/)
 	# wheel is built package without go through the “build” process(create build/)
-	{ hash newversion.py && newversion.py version;} 2>/dev/null ;  { echo version `cat version`; }
+	{ hash newversion.py 2>/dev/null && newversion.py version;} ;  { echo version `cat version`; }
 	python3 setup.py sdist bdist_wheel
 	twine upload  dist/*
 
