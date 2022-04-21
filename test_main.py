@@ -3,8 +3,8 @@ from dateutil.parser import parse as parsetime
 from datetime import datetime, date as dateType, timedelta
 import os
 
-def isCloseTime(t1:datetime, t2:datetime, tol=timedelta(microseconds=10)):
-    return abs(t1-t2)<tol
+def isCloseTime(t1:datetime, t2:datetime, tol=timedelta(milliseconds=1)):
+    return abs(t1-t2)<=tol
 
 def test_saveXlsx():
 
