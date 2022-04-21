@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from typing import OrderedDict
 import openpyxl
+from openpyxl.cell import cell as cellLib
 import csv
 import sys
 import os
@@ -92,35 +93,44 @@ def get_merged_cells(sh):
 
 
 """
-None cell
+isValidCell (MergedCell or Cell)
 """
-
-
-def isValid(cell, merged_cells):
-    # return False
+def isValidCell(cell, merged_cells):
     #coord = f'{cell.column}{cell.row}'
     coord = cell.coordinate
-    valid = True
-    if cell.value == None:
-        for i, merged_cell in enumerate(list(merged_cells)):
-            # clear
+
+    if cell.value != None:
+        return True
+
+    if isinstance(cell, cellLib.Cell):
+        return True
+
+    # for latest xlsx
+    if instanceof(cell, openpyxl.cell.cell.MergedCell):
+        return False 
+
+    # for old xlsx
+    for i, merged_cell in enumerate(list(merged_cells)):
+        if not hasattr(cell, 'col_idx'): # latest xlsx has no attribute col_idx
+            return False
+        # clear
+        if (
+                cell.col_idx > merged_cell.max_col and
+                cell.row > merged_cell.max_row
+        ):
+            merged_cells.remove(merged_cell)
+
+        elif (
+                merged_cell.min_col <= cell.col_idx <= merged_cell.max_col and
+                merged_cell.min_row <= cell.row <= merged_cell.max_row
+        ):
             if (
-                    cell.col_idx > merged_cell.max_col and
-                    cell.row > merged_cell.max_row
+                    merged_cell.min_col != cell.col_idx or
+                    merged_cell.min_row != cell.row
             ):
-                merged_cells.remove(merged_cell)
+                return True
 
-            elif (
-                    merged_cell.min_col <= cell.col_idx <= merged_cell.max_col and
-                    merged_cell.min_row <= cell.row <= merged_cell.max_row
-            ):
-                if (
-                        merged_cell.min_col != cell.col_idx or
-                        merged_cell.min_row != cell.row
-                ):
-                    valid = True #  Split merge_cells
-
-    return valid
+    return False
 
 
 def parse(src):
@@ -151,9 +161,9 @@ def parseXlsx(src):
             debug('--iter row-')
             row = []
             for _, cell in zip(range(max_col_idx), r):
-                if isValid(cell, merged_cells):
-                    v = getCellValue(cell)
-                    row.append(v)
+                #if isValid(cell, merged_cells):
+                v = getCellValue(cell)
+                row.append(v)
             if(any(row)):
                 debug(row)
                 yield row

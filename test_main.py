@@ -32,7 +32,9 @@ def test_saveXlsx():
     #os.remove('/tmp/test.csv')
 
 
-def testParseXlsx():
+def testParseEmptyXlsx():
     saveXlsx([], '/tmp/test_xlparser.xlsx')
     assert len(list(parse('/tmp/test_xlparser.xlsx'))) == 0
     
+def testParseMergedXlsx():
+    assert len(list(parse('./testdata/merged.xlsx'))) > 0
