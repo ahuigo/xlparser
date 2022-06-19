@@ -16,11 +16,13 @@ else:
 
 
 @click.command()
+@click.option('-h', is_flag=True, help='Print help usage')
+@click.option('-d', is_flag=True, help='Debug mode')
 @click.argument('args', nargs=-1)
-def main(args):
+def main(args, **kw):
     """
     Usage: 
-        xlparser [options] INFILE [OUTFILE]\n
+        xlparser [options] <src_file> [<out_file>]\n
             options:\n
                 -h       For help.\n
         # From xlsx to csv.\n
@@ -35,11 +37,22 @@ def main(args):
         # From csv to stdout.\n
         $ xlparser source.xlsx | head \n
     """
+    if 'h' in kw and kw['h']:
+        ctx = click.get_current_context()
+        click.echo(ctx.get_help())
+        ctx.exit()
     if len(args)<=1:
         args = args[0],'-'
     file, outfile, *_ = args
-    rows = parse(file)
-    debug(f'Convert xlsx from {argv[1]}')
+    try:
+        rows = parse(file)
+        debug(f'Convert xlsx from {argv[1]}')
+    except BaseException as e:
+        if kw['d']:
+            raise e
+        else:
+            sys.stderr.write(f'\033[41m{e}!\033[0m\n')
+        quit(1)
 
     if outfile.endswith('.json'):
         json.dump(list(rows), open(outfile,'w'), ensure_ascii=False)

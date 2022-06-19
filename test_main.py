@@ -38,3 +38,11 @@ def testParseEmptyXlsx():
     
 def testParseMergedXlsx():
     assert len(list(parse('./testdata/merged.xlsx'))) > 0
+
+
+def testUnsupportedFile():
+    try:
+        parse('./1.log') 
+    except Exception as e:
+        msg = e.__str__()
+        assert '1.log' in msg, "require unsupported msg aboult 1.log"

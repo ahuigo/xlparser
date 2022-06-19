@@ -140,7 +140,9 @@ def parse(src):
         return parseXlsx(src)
     if src.endswith('.csv'):
         return parseCsv(src)
-
+    else:
+        errmsg = f'Unsupported filetype:{src}'
+        raise Exception(errmsg)
 
 '''
 " parse xlsx, xls
