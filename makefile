@@ -13,6 +13,13 @@ test:
 
 pkg: gitcheck test
 	rm -rf  dist/*
+	{ hash newversion.py 2>/dev/null && newversion.py pyproject.toml;} 	# one cli
+	poetry build && poetry publish
+	git commit -am "$(msg)"
+	git push origin HEAD
+
+pkg2: gitcheck test
+	rm -rf  dist/*
 	# sdist is source code(dist/ and pkg.egg-info/)
 	# wheel is built package without go through the “build” process(create build/)
 	{ hash newversion.py 2>/dev/null && newversion.py version;} ;  { echo version `cat version`; }

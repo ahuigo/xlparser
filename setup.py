@@ -61,7 +61,7 @@ setup(
 
     # dependencies
     python_requires='>=3.6.1',
-    install_requires=['xlrd', 'click','openpyxl>=2.5.4', 'python-dateutil','pillow'],
+    install_requires=['xlrd', 'click','openpyxl>=2.5.4', 'python-dateutil'],
 
 
     description="xlparser cli/lib for xlsx, json, csv...",
