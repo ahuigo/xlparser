@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xlparser"
-version = "0.5.11"
+version = "0.5.13"
 description = "Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json)."
 readme = "README.en.md"
 authors = ["ahuigo <1781999+ahuigo@users.noreply.github.com>"]

@@ -11,6 +11,7 @@ install:
 test:
 	python3 -m pytest -s
 
+# poetry: make pkg msg='xx'
 pkg: gitcheck test
 	rm -rf  dist/*
 	{ hash newversion.py 2>/dev/null && newversion.py pyproject.toml;} 	# one cli
@@ -18,6 +19,7 @@ pkg: gitcheck test
 	git commit -am "$(msg)"
 	git push origin HEAD
 
+# legacy
 pkg2: gitcheck test
 	rm -rf  dist/*
 	# sdist is source code(dist/ and pkg.egg-info/)
