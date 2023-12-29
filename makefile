@@ -28,7 +28,7 @@ pkg2: gitcheck test
 	# one cli
 	# python3 setup.py sdist bdist_wheel upload
 	python3 setup.py sdist bdist_wheel
-	twine upload  dist/*
+	twine upload --repository xlparser dist/*
 
 	git commit -am "$(msg)"
 	git push origin HEAD

@@ -20,7 +20,8 @@ entry_points=
 name='xlparser'
 version = open('version').read().strip()
 setup(
-    name=name,
+    # pip install name  与 import name 可不一样
+    name=name, # 1. pip install name
     version=version,
     author="ahuigo",
     author_email="ahui132@qq.com",
@@ -41,8 +42,8 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=[],
-    py_modules=['xlparser'],
+    packages=[], # 2. import <packages>
+    py_modules=['xlparser'], 2. import xlparser
 
     # script
     # To provide executable scripts, use entry points in preference to the
