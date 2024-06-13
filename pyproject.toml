@@ -6,6 +6,11 @@ readme = "README.en.md"
 authors = ["ahuigo <1781999+ahuigo@users.noreply.github.com>"]
 license = "MIT"
 
+[[tool.poetry.packages]]
+include = "*.py"
+[[tool.poetry.packages]]
+include = "xlparser"
+
 [tool.poetry.dependencies]
 python = ">=3.7"
 click = "^8.1.3"
