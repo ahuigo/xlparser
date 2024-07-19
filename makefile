@@ -20,7 +20,7 @@ pkg: gitcheck test
 	git push origin HEAD
 
 # legacy
-pkg2: gitcheck test
+pkg-legacy: gitcheck test
 	rm -rf  dist/*
 	# sdist is source code(dist/ and pkg.egg-info/)
 	# wheel is built package without go through the “build” process(create build/)
@@ -34,3 +34,11 @@ pkg2: gitcheck test
 	git push origin HEAD
 
 
+############### how to create a new project with poetry? ##########################
+# 1. create project package
+create:
+	poetry new mypkg
+
+# 2. 生成poetry.lock + requirements.txt
+lock:
+	poetry export --output requirements.txt
