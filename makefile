@@ -7,10 +7,13 @@ install:
 	pip install -e .
 	#-e git+https://somerepo/bar.git#egg=bar
 	#-e /path/to/pkg
+install-git:
+	pipx install git+https://github.com/ahuigo/xlparser.git
 
 test:
 	python3 -m pytest -s
 
+###################### publish package #####################################
 # poetry: make pkg msg='xx'
 pkg: gitcheck test
 	rm -rf  dist/*
@@ -41,4 +44,5 @@ create:
 
 # 2. 生成poetry.lock + requirements.txt
 lock:
+	poetry lock
 	poetry export --output requirements.txt

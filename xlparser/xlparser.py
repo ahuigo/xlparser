@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from typing import OrderedDict
+from typing import OrderedDict,Any
 import openpyxl
 from openpyxl.cell import cell as cellLib
 import csv
@@ -9,7 +9,8 @@ from sys import argv
 from datetime import datetime, timedelta, date as dateType
 from dateutil.parser import parse as strptime
 import json
-import _io
+
+import _io # type: ignore
 
 __all__ = ['loadZip', 'parse', "parseXlsx", 'parseCsv',
            'parseXls', 'saveCsv', 'saveXlsx', 'openXlsx', 'rows2dict']
@@ -116,7 +117,7 @@ def isValidCell(cell, merged_cells):
         return True
 
     # for latest xlsx
-    if instanceof(cell, openpyxl.cell.cell.MergedCell):
+    if isinstance(cell, openpyxl.cell.cell.MergedCell): 
         return False 
 
     # for old xlsx
@@ -245,7 +246,7 @@ def saveXlsx(rows, filep):
     if not isinstance(filep, _io.TextIOWrapper):
         filep = open(filep, 'wb')
     wb = openpyxl.Workbook()
-    ws1 = wb.active
+    ws1: Any = wb.active
 
     if not hasattr(rows, '__next__'):
         rows = iter(rows)
@@ -256,8 +257,8 @@ def saveXlsx(rows, filep):
     except StopIteration:
         row = None
     if isinstance(row, (dict, OrderedDict)):
-        ws1.append(formatXlsxRow(row.keys()))
-        ws1.append(formatXlsxRow(row.values()))
+        ws1.append(formatXlsxRow(row.keys()))   # type: ignore
+        ws1.append(formatXlsxRow(row.values())) # type: ignore
     elif isinstance(row, (list)):
         ws1.append(formatXlsxRow(row))
     elif row==None:
@@ -269,7 +270,7 @@ def saveXlsx(rows, filep):
     for row in rows:
         if isinstance(row, (dict, OrderedDict)):
             row = row.values()
-        ws1.append(formatXlsxRow(row))
+        ws1.append(formatXlsxRow(row)) # type: ignore
 
     wb.save(filep)
 
