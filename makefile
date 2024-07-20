@@ -22,21 +22,6 @@ pkg: gitcheck test
 	git commit -am "$(msg)"
 	git push origin HEAD
 
-# legacy
-pkg-legacy: gitcheck test
-	rm -rf  dist/*
-	# sdist is source code(dist/ and pkg.egg-info/)
-	# wheel is built package without go through the “build” process(create build/)
-	{ hash newversion.py 2>/dev/null && newversion.py version;} ;  { echo version `cat version`; }
-	# one cli
-	# python3 setup.py sdist bdist_wheel upload
-	python3 setup.py sdist bdist_wheel
-	twine upload --repository xlparser dist/*
-
-	git commit -am "$(msg)"
-	git push origin HEAD
-
-
 ############### how to create a new project with poetry? ##########################
 # 1. create project package
 create:

@@ -1,54 +1,53 @@
-- [xlparser](#xlparser)
-  - [Install](#install)
-  - [Usage](#usage)
-    - [CLI Usage](#cli-usage)
-    - [Module Usage](#module-usage)
-    - [Parse any type of file](#parse-any-type-of-file)
-    - [Save to any type of file](#save-to-any-type-of-file)
-    - [Csv operation](#csv-operation)
-    - [Zip operation](#zip-operation)
-  - [Required](#required)
-
 # xlparser
-Parse excel(xlsx/xls/csv) to other format(csv, xlsx, json).
+将 excel(xlsx/xls/csv) 转到其他的格式(csv, xlsx, json).
 
+> Warning: 如果你遇到问题，最好在issue 提交明确的报错信息。
 
 [![](https://img.shields.io/pypi/pyversions/xlparser.svg?longCache=True)](https://pypi.org/pypi/xlparser/)
 [![](https://img.shields.io/pypi/v/xlparser.svg?maxAge=36000)](https://pypi.org/pypi/xlparser/)
 
-## Install
+- [xlparser](#xlparser)
+  - [安装](#安装)
+  - [使用](#使用)
+    - [命令行示例](#命令行示例)
+    - [python 调用示例](#python-调用示例)
+    - [转任何类型的文件](#转任何类型的文件)
+    - [保存任何类型的文件](#保存任何类型的文件)
+    - [Csv 文件处理](#csv-文件处理)
+    - [Zip 文件处理](#zip-文件处理)
+  - [Required](#required)
+
+[English](README.md)
+
+## 安装
 
     pip install xlparser
-    # or
-    pip3 install xlparser
 
-If you want to filter fields, it will be convenient with [xcut](https://github.com/ahuigo/xcut).
+如果想过滤字段，结合[xcut](https://github.com/ahuigo/xcut) 使用更方便
 
-    pip install xcut 
-    # or
-    pip3 install xcut 
+    pip install xcut
 
-## Usage
+## 使用
 
     $ xlparser -h
     xlparser [options] INFILE [OUTFILE]\n
         options:\n
             -h       For help.\n
 
-### CLI Usage
-From xlsx to csv.
+### 命令行示例
+将 xlsx 转成 csv
 
     $ xlparser source.xlsx new.csv 
 
-From csv to xlsx.
+将 csv 转成 xlsx
 
     $ xlparser source.csv new.xlsx 
 
-From csv to json.
+将 csv 转成 json
 
     $ xlparser source.csv new.json
 
-From xlsx to csv(stdout).
+将 xlsx 转成 csv(标准输出)
 
     $ xlparser source.xlsx | head 
 
@@ -57,7 +56,7 @@ From xlsx to csv(stdout).
     "李雷,韩梅",15
     小花,16
 
-Use xcut to filter fields.
+xcut 命令结合
 
     $ xlparser src.xlsx | xcut --from-csv -f name 
     name
@@ -69,22 +68,9 @@ Use xcut to filter fields.
     15,"李雷,韩梅"
     16,小花
 
-Convert xlsx to csv
+### python 调用示例
 
-    $ xlparser src.xlsx test.csv; 
-    $ cat test.csv
-    name, age
-    李雷,15
-    小花,16
-
-Convert csv to json
-
-    $ xlparser test.csv test.json
-    [["name", "age"], ["李雷", "15"], ["小花", "16"]]
-
-### Module Usage
-
-#### Parse any type of file
+#### 转任何类型的文件
 `parse` any type of file to rows:
 
     >>> from xlparser import parse, saveCsv
@@ -94,10 +80,10 @@ Convert csv to json
 
 The `parse` function supports the following file formats: .csv, .xls, .xlsx .
 
-#### Save to any type of file
+#### 保存任何类型的文件
 Save rows to csv
 
-    >>> from xlparser import saveCsv
+    >>> from xlparser import parse, saveCsv
     >>> rows = [['foo', 'bar'], ['看', '我', '变']]
     >>> saveCsv(rows, 'test.csv')
 
@@ -105,7 +91,7 @@ Save rows to xlsx
 
     >>> saveXlsx(rows, 'test.xlsx')
 
-#### Csv operation
+#### Csv 文件处理
 
     >>> from xlparser import *
 
@@ -115,7 +101,7 @@ Save rows to xlsx
     >>> list(parseCsv('test.csv'))
     [['foo', 'bar'], ['看', '我', '变']]
 
-#### Zip operation
+#### Zip 文件处理
 
     >>> from xlparser import loadZip
     >>> zf = loadZip('test.xlsx')
@@ -124,7 +110,7 @@ Save rows to xlsx
     >>> zf.extract('xl/media/image1.png', '/tmp')
     >>> os.rename('/tmp/'+'xl/media/image1.png', './image1.png')
 
-## Required
+### Required
 1. python>=3.5
 2. xlrd: required by xls
 2. openpyxl>=2.5.4: required by xlsx
