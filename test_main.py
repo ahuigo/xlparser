@@ -13,7 +13,7 @@ def test_saveXlsx():
     saveCsv(rows, '/tmp/test_xlparser.csv')
     saveXlsx(rows, '/tmp/test_xlparser.xlsx')
     v = list(parse('/tmp/test_xlparser.xlsx'))[0][0]
-    assert v == 'foo'
+    assert v == 'foo', "parse xlsx failed"
 
     # test dict
     rows = [{"myname":"Alex", "myage":20}]
@@ -23,7 +23,7 @@ def test_saveXlsx():
     rows = [{"start_time":datetime.now(), "pjson":{"json":1}}, ["time", "data"], [dateType(2022,1,1)]]
     saveXlsx(rows, '/tmp/test_xlparser.xlsx')
     newrow = list(parse('/tmp/test_xlparser.xlsx'))[1]
-    assert isCloseTime(parsetime(newrow[0]), rows[0]['start_time'])
+    assert isCloseTime(parsetime(newrow[0]), rows[0]['start_time']), 'parse xlsx time failed'
 
     # test datetime and json
     rows = [[1,23]]
